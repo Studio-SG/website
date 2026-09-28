@@ -24,17 +24,26 @@ const foco = 'focus-visible:outline-1 focus-visible:outline-offset-4 focus-visib
 						<Logo class="h-11 w-auto text-tinta sm:h-12" />
 					)
 				}
-				<a
-					href="/paquetes"
-					aria-current={enPaquetes ? 'page' : undefined}
-					class:list={[
-						'font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl',
-						foco,
-						enPaquetes ? 'underline' : 'hover:underline',
-					]}
-				>
-					Paquetes
-				</a>
+				<div class="flex gap-8">
+				    <a
+					    href="/paquetes"
+					    aria-current={enPaquetes ? 'page' : undefined}
+					    class:list={[
+						  'font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl',
+						  foco,
+						  enPaquetes ? '' : 'hover:underline',
+					  ]}
+				    >
+					    Paquetes
+				    </a>
+				    <a
+						class="font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl hover:underline"
+					    href="mailto:info@diegodesalas.com"
+					    class={foco}
+				    >
+					    Contacto
+				    </a>
+				</div>
 			</div>
 		</div>
 	</div>
