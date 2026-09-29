@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import { email } from '../datos';
 
 const año = new Date().getFullYear();
 ---
@@ -11,7 +12,7 @@ const año = new Date().getFullYear();
 		<div class="flex items-center gap-5">
 			<Logo class="h-14 w-auto text-blanco" />
 			<div class="text-left">
-				<p class="text-[1.375rem] leading-tight font-medium">Digital</p>
+				<p class="text-[1.375rem] leading-tight font-medium">Studio</p>
 				<p class="mt-1 text-[1.0625rem] text-blanco/75">Tu web a medida.</p>
 			</div>
 		</div>
@@ -20,7 +21,7 @@ const año = new Date().getFullYear();
 				625 390 963
 			</p>
 			<p class="mt-5 text-[clamp(1.375rem,2.6vw,2.25rem)] font-light break-all text-blanco/80 sm:break-normal">
-				info@diegodesalas.com
+				{email}
 			</p>
 		</div>
 	</div>
@@ -29,7 +30,7 @@ const año = new Date().getFullYear();
 		<div
 			class="flex flex-col items-center gap-3 border-t border-blanco/20 py-6 text-center text-[0.8125rem] text-blanco/70 sm:flex-row sm:justify-between sm:text-left"
 		>
-			<p>© {año} SG Digital. Todos los derechos reservados.</p>
+			<p>© {año} SG Studio. Todos los derechos reservados.</p>
 			<ul class="flex gap-x-2 text-[0.75rem] whitespace-nowrap max-[359px]:flex-wrap max-[359px]:justify-center sm:flex-wrap sm:gap-x-3 sm:gap-y-2 sm:text-[0.8125rem]">
 				<li><a href="/aviso-legal" class="underline-offset-4 sm:text-sm hover:underline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-blanco">Aviso legal</a></li>
 				<li aria-hidden="true">·</li>

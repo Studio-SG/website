@@ -9,6 +9,7 @@ import autoclub from '../assets/projects/autoclubtrackdays.png';
 import bocaboca from '../assets/projects/bocaboca.png';
 import iphone from '../assets/iphone-diseno.png';
 import Header from '../components/Header.astro';
+import Contacto from '../components/Contacto.astro';
 import Footer from '../components/Footer.astro';
 
 // Foto pequeña para el fondo difuminado de la portada en pantallas verticales.
@@ -47,8 +48,8 @@ const proyectos = [
 ---
 
 <Layout
-	title="SG Digital | Webs a medida en Madrid"
-	description="SG Digital diseña webs a medida para todo tipo de empresas y eventos en Madrid."
+	title="SG Studio | Webs a medida en Madrid"
+	description="SG Studio diseña webs a medida para todo tipo de empresas y eventos en Madrid."
 >
 	<div id="pista-portada" class="pista-portada">
 		<section class="portada">
@@ -74,16 +75,16 @@ const proyectos = [
 	</div>
 
 	<main>
-		<Header />
+		<Header actual="inicio" />
 
-		<!-- SG Digital -->
+		<!-- SG Studio -->
 		<section class="overflow-x-clip bg-blanco" aria-labelledby="titulo-sg">
 			<div class="mx-auto max-w-352 px-6 sm:px-10 lg:px-16">
 				<div class="relative py-24 sm:py-32 lg:py-40">
 					<!-- Bloque de texto: por encima del iPhone cuando este entra desde la izquierda -->
 					<div class="relative z-10">
 						<h2 id="titulo-sg" class="font-serif text-[clamp(4.5rem,15vw,13rem)] leading-[0.9] tracking-[-0.02em]">
-							SG Digital
+							SG Studio
 						</h2>
 						<p class="mt-10 max-w-[42ch] text-[clamp(1.25rem,2vw,1.5rem)] leading-[1.45]">
 							Diseñamos y desarrollamos webs a medida y las herramientas que hay detrás: paneles para
@@ -151,25 +152,7 @@ const proyectos = [
 			</div>
 		</section>
 
-		<!-- Interesado -->
-		<section class="bg-salvia" aria-labelledby="titulo-interesado">
-			<div
-				class="mx-auto flex max-w-352 flex-col gap-8 px-6 py-24 sm:flex-row sm:items-baseline sm:justify-around sm:px-10 sm:py-48 lg:px-16"
-			>
-				<h2
-					id="titulo-interesado"
-					class="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[1.02] tracking-[-0.01em]"
-				>
-					¿Interesado?
-				</h2>
-				<a
-					href="/paquetes"
-					class="font-serif text-[2.125rem] text-verde sm:text-[clamp(1.75rem,3vw,3.5rem)] underline decoration-1 underline-offset-8 hover:text-black transition-colors focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-verde"
-				>
-					Descúbrenos <span aria-hidden="true">→</span>
-				</a>
-			</div>
-		</section>
+		<Contacto />
 	</main>
 
 	<Footer />
@@ -178,9 +161,9 @@ const proyectos = [
 <script>
 	// Al hacer scroll la cámara entra en la pantalla del portátil. Primero el logo
 	// de la pantalla se funde a blanco y desde ese blanco aparece una copia del principio
-	// de <main> (barra + SG Digital); cuando el zoom termina, la copia está a tamaño real
+	// de <main> (barra + SG Studio); cuando el zoom termina, la copia está a tamaño real
 	// justo donde va el contenido de verdad, se cambia una por otra y el scroll sigue normal.
-	// Al llegar, el iPhone de SG Digital entra solo desde la izquierda; si se vuelve a subir
+	// Al llegar, el iPhone de SG Studio entra solo desde la izquierda; si se vuelve a subir
 	// a la escena, se recoge y la próxima vez vuelve a entrar.
 	const pista = document.getElementById('pista-portada')!;
 	const portada = pista.querySelector<HTMLElement>('.portada')!;

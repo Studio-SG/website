@@ -1,15 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Contacto from '../components/Contacto.astro';
 import Plan from '../components/Plan.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout
-	title="Planes y precios | SG Digital"
+	title="Planes y precios | SG Studio"
 	description="Webs a medida para empresas y eventos en Madrid. Esencial 399 €, Estándar 699 €, Premium 999 €, mantenimiento desde 29 € al mes."
 >
-	<Header enPaquetes />
+	<Header actual="paquetes" />
 
 	<main>
 		<!-- Paquetes -->
@@ -136,6 +137,26 @@ import Footer from '../components/Footer.astro';
 						/>
 					</div>
 				</div>
+			</div>
+		</section>
+
+		<!-- Interesado -->
+		<section class="bg-salvia" aria-labelledby="titulo-interesado">
+			<div
+				class="mx-auto flex max-w-352 flex-col gap-8 px-6 py-24 sm:flex-row sm:items-baseline sm:justify-around sm:px-10 sm:py-48 lg:px-16"
+			>
+				<h2
+					id="titulo-interesado"
+					class="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[1.02] tracking-[-0.01em]"
+				>
+					¿Interesado?
+				</h2>
+				<a
+					href="/#contact"
+					class="font-serif text-[2.125rem] text-verde sm:text-[clamp(1.75rem,3vw,3.5rem)] underline decoration-1 underline-offset-8 hover:text-black transition-colors focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-verde"
+				>
+					Descúbrenos <span aria-hidden="true">→</span>
+				</a>
 			</div>
 		</section>
 	</main>

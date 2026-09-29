@@ -1,0 +1,199 @@
+---
+import { email, claveWeb3Forms } from '../datos';
+
+const campo =
+	'mt-2 w-full border-0 border-b border-tinta/25 bg-transparent py-3 text-[1.1875rem] text-tinta outline-none transition-colors placeholder:text-grafito/50 focus:border-verde aria-[invalid=true]:border-teja';
+const etiqueta = 'text-[1.0625rem] text-grafito';
+---
+
+<!-- Contacto: al final de / y de /paquetes; el enlace «Contacto» de la cabecera lleva aquí -->
+<section id="contact" class="scroll-mt-28 bg-blanco" aria-labelledby="titulo-contacto">
+	<div class="mx-auto max-w-352 px-6 sm:px-10 lg:px-16">
+		<div class="filete" aria-hidden="true"></div>
+		<div class="grid gap-16 py-24 sm:py-32 lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)] lg:gap-24 lg:py-40">
+			<div>
+				<h2
+					id="titulo-contacto"
+					class="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] leading-[1.02] tracking-[-0.01em]"
+				>
+					Contacto
+				</h2>
+				<p class="mt-8 max-w-[34ch] text-[clamp(1.25rem,2vw,1.5rem)] leading-[1.4] text-grafito">
+					Cuéntanos qué necesitas y te preparamos una propuesta a medida, sin compromiso.
+				</p>
+			</div>
+
+			<div>
+				<!-- Sin JavaScript el formulario se envía igual a Web3Forms, con la validación del navegador.
+				     Con JavaScript los avisos son propios (global.css, .aviso) y el envío no sale de la página. -->
+				<form
+					class="formulario-contacto flex flex-col gap-10"
+					action="https://api.web3forms.com/submit"
+					method="POST"
+				>
+					<input type="hidden" name="access_key" value={claveWeb3Forms} />
+					<input type="hidden" name="subject" value="Nuevo mensaje desde sgstudio.es" />
+					<input type="hidden" name="from_name" value="Web de SG Studio" />
+					<!-- Trampa para bots: una persona no la ve ni la rellena. -->
+					<input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+					<div>
+						<label for="contacto-nombre" class={etiqueta}>Nombre</label>
+						<input
+							id="contacto-nombre"
+							name="name"
+							type="text"
+							autocomplete="name"
+							required
+							maxlength="100"
+							aria-describedby="aviso-nombre"
+							class={campo}
+						/>
+						<p id="aviso-nombre" class="aviso" hidden></p>
+					</div>
+
+					<div>
+						<label for="contacto-email" class={etiqueta}>Email</label>
+						<input
+							id="contacto-email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							required
+							maxlength="200"
+							aria-describedby="aviso-email"
+							class={campo}
+						/>
+						<p id="aviso-email" class="aviso" hidden></p>
+					</div>
+
+					<div>
+						<label for="contacto-mensaje" class={etiqueta}>Mensaje</label>
+						<textarea
+							id="contacto-mensaje"
+							name="message"
+							rows="5"
+							required
+							maxlength="5000"
+							aria-describedby="aviso-mensaje"
+							class:list={[campo, 'resize-y']}></textarea>
+						<p id="aviso-mensaje" class="aviso" hidden></p>
+					</div>
+
+					<!-- Consentimiento y botón en una fila; si no caben (móvil), el botón baja. El pt-4 alinea
+					     la casilla con el centro del botón. -->
+					<div class="flex flex-wrap items-start justify-between gap-x-8 gap-y-8">
+						<div class="min-w-0 grow basis-[18rem] pt-4">
+							<label class="flex cursor-pointer items-start gap-4 text-[1.0625rem] leading-normal text-grafito">
+								<input
+									id="contacto-consentimiento"
+									name="consentimiento"
+									type="checkbox"
+									required
+									value="Acepta la política de privacidad"
+									aria-describedby="aviso-consentimiento"
+									class="casilla mt-0.5 shrink-0"
+								/>
+								<span>
+									He leído y acepto la{' '}
+									<a
+										href="/politica-de-privacidad"
+										target="_blank"
+										class="text-tinta underline decoration-1 underline-offset-4 hover:text-verde"
+										>política de privacidad</a
+									>.
+								</span>
+							</label>
+							<p id="aviso-consentimiento" class="aviso" hidden></p>
+						</div>
+
+						<button
+							type="submit"
+							class="boton-barrido inline-flex shrink-0 cursor-pointer items-center gap-3 border border-bosque px-8 py-4 text-[1.1875rem] text-bosque focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-bosque disabled:cursor-wait disabled:opacity-60"
+						>
+							<span class="texto-boton">Enviar</span> <span aria-hidden="true">→</span>
+						</button>
+					</div>
+					<p class="estado -mt-4 text-[1.0625rem] text-grafito empty:hidden" role="status"></p>
+				</form>
+
+				<div class="gracias outline-none" hidden tabindex="-1">
+					<p class="font-serif text-[clamp(2rem,3vw,2.625rem)] leading-tight">Gracias por escribirnos.</p>
+					<p class="mt-4 max-w-[40ch] text-[1.1875rem] leading-[1.6] text-grafito">
+						Hemos recibido tu mensaje y te responderemos lo antes posible.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script define:vars={{ email }}>
+	// Los avisos de los campos obligatorios los pinta la página en vez de la burbuja del navegador:
+	// se validan al enviar y, desde ese momento, cada campo se revisa al escribir en él.
+	const formulario = document.querySelector('.formulario-contacto');
+	const gracias = document.querySelector('.gracias');
+	const boton = formulario.querySelector('button[type="submit"]');
+	const estado = formulario.querySelector('.estado');
+	const campos = [...formulario.querySelectorAll('[required]')];
+	formulario.noValidate = true;
+
+	function textoAviso(campo) {
+		const v = campo.validity;
+		if (campo.type === 'checkbox') return v.valid ? '' : 'Necesitamos tu consentimiento para poder responderte.';
+		if (v.valueMissing || !campo.value.trim()) {
+			return {
+				name: 'Escribe tu nombre.',
+				email: 'Escribe tu email para que podamos responderte.',
+				message: 'Cuéntanos en qué podemos ayudarte.',
+			}[campo.name];
+		}
+		if (v.typeMismatch) return 'Revisa el email: parece que le falta algo.';
+		if (v.tooLong) return 'Es demasiado largo.';
+		return '';
+	}
+
+	function revisar(campo) {
+		const texto = textoAviso(campo);
+		const aviso = document.getElementById(campo.getAttribute('aria-describedby'));
+		aviso.textContent = texto;
+		aviso.hidden = !texto;
+		campo.setAttribute('aria-invalid', String(Boolean(texto)));
+		return !texto;
+	}
+
+	let intentado = false;
+	for (const campo of campos) {
+		campo.addEventListener(campo.type === 'checkbox' ? 'change' : 'input', () => intentado && revisar(campo));
+	}
+
+	formulario.addEventListener('submit', async (evento) => {
+		evento.preventDefault();
+		intentado = true;
+		const invalidos = campos.filter((campo) => !revisar(campo));
+		if (invalidos.length) {
+			invalidos[0].focus();
+			return;
+		}
+
+		boton.disabled = true;
+		boton.querySelector('.texto-boton').textContent = 'Enviando…';
+		estado.textContent = '';
+		try {
+			const respuesta = await fetch(formulario.action, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify(Object.fromEntries(new FormData(formulario))),
+			});
+			const { success } = await respuesta.json();
+			if (!success) throw new Error();
+			formulario.hidden = true;
+			gracias.hidden = false;
+			gracias.focus();
+		} catch {
+			estado.innerHTML = `No se ha podido enviar. Inténtalo de nuevo o escríbenos a <a class="text-tinta underline underline-offset-4" href="mailto:${email}">${email}</a>.`;
+			boton.disabled = false;
+			boton.querySelector('.texto-boton').textContent = 'Enviar';
+		}
+	});
+</script>

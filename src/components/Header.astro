@@ -2,12 +2,14 @@
 import Logo from './Logo.astro';
 
 interface Props {
-	// En /paquetes el logo lleva al inicio y el enlace a Paquetes queda marcado como página actual.
-	enPaquetes?: boolean;
+	// Página en la que está: en el inicio el logo no enlaza a sí mismo, y en /paquetes el enlace
+	// a Paquetes queda marcado como página actual.
+	actual?: 'inicio' | 'paquetes';
 }
 
-const { enPaquetes = false } = Astro.props;
+const { actual } = Astro.props;
 const foco = 'focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-tinta';
+const enlace = 'font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl';
 ---
 
 <header class="sticky top-0 z-20">
@@ -16,33 +18,25 @@ const foco = 'focus-visible:outline-1 focus-visible:outline-offset-4 focus-visib
 		<div class="mx-auto max-w-352 px-6 sm:px-10 lg:px-16">
 			<div class="flex items-center justify-between gap-6 border-b border-hilo py-6 sm:py-8">
 				{
-					enPaquetes ? (
-						<a href="/" aria-label="SG Digital, volver al inicio" class={foco}>
+					actual === 'inicio' ? (
+						<Logo class="h-11 w-auto text-tinta sm:h-12" />
+					) : (
+						<a href="/" aria-label="SG Studio, volver al inicio" class={foco}>
 							<Logo class="h-11 w-auto text-tinta sm:h-12" />
 						</a>
-					) : (
-						<Logo class="h-11 w-auto text-tinta sm:h-12" />
 					)
 				}
 				<div class="flex gap-8">
-				    <a
-					    href="/paquetes"
-					    aria-current={enPaquetes ? 'page' : undefined}
-					    class:list={[
-						  'font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl',
-						  foco,
-						  enPaquetes ? '' : 'hover:underline',
-					  ]}
-				    >
-					    Paquetes
-				    </a>
-				    <a
-						class="font-serif text-[1.375rem] text-tinta decoration-1 underline-offset-4 sm:text-2xl hover:underline"
-					    href="mailto:info@diegodesalas.com"
-					    class={foco}
-				    >
-					    Contacto
-				    </a>
+					<a
+						href="/paquetes"
+						aria-current={actual === 'paquetes' ? 'page' : undefined}
+						class:list={[enlace, foco, actual === 'paquetes' ? 'underline' : 'hover:underline']}
+					>
+						Paquetes
+					</a>
+					<!-- Inicio y /paquetes tienen el formulario al final: ahí se baja hasta él sin salir de la
+					     página. Desde las páginas legales se va al del inicio. -->
+					<a href={actual ? '#contact' : '/#contact'} class:list={[enlace, foco, 'hover:underline']}>Contacto</a>
 				</div>
 			</div>
 		</div>

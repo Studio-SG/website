@@ -1,0 +1,97 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { titular, nif, domicilio, email, web } from '../datos';
+---
+
+<Legal
+	title="Política de privacidad"
+	description="Política de privacidad de sgstudio.es: qué datos personales se tratan, con qué finalidad y cómo ejercer tus derechos."
+>
+	<h1>Política de Privacidad</h1>
+	<p>Última actualización: 30 de septiembre de 2026</p>
+
+	<h2>1. Responsable del tratamiento</h2>
+	<p><strong>Identidad:</strong> {titular}</p>
+	<p><strong>CIF/NIF:</strong> {nif}</p>
+	<p><strong>Dirección:</strong> {domicilio}</p>
+	<p><strong>Correo electrónico:</strong> <a href={`mailto:${email}`}>{email}</a></p>
+	<p><strong>Sitio web:</strong> {web}</p>
+
+	<h2>2. Datos personales que recopilamos</h2>
+	<p>En {web} recopilamos los siguientes datos personales:</p>
+	<ul>
+		<li>Dirección IP y datos de navegación</li>
+		<li>Nombre, correo electrónico y el contenido del mensaje, cuando nos escribes a través del formulario de contacto</li>
+	</ul>
+
+	<h2>3. Finalidad del tratamiento</h2>
+	<p>Los datos personales facilitados se tratan con las siguientes finalidades:</p>
+	<ul>
+		<li>Gestión de consultas y solicitudes de información.</li>
+	</ul>
+
+	<h2>4. Legitimación</h2>
+	<p>La base legal para el tratamiento de sus datos es:</p>
+	<ul>
+		<li>El consentimiento del interesado (art. 6.1.a del Reglamento (UE) 2016/679).</li>
+	</ul>
+
+	<h2>5. Destinatarios</h2>
+	<p>Sus datos podrán ser comunicados a los siguientes prestadores de servicios:</p>
+	<ul>
+		<li>Google LLC — Analítica web.</li>
+		<li>
+			Google LLC — Tipografías web (Google Fonts), que recibe la dirección IP del visitante al cargar las fuentes.
+		</li>
+		<li>
+			Web3Forms — Envío por correo electrónico de los mensajes del formulario de contacto. Política de privacidad:
+			<a href="https://web3forms.com/privacy" target="_blank" rel="noopener">https://web3forms.com/privacy</a>
+		</li>
+	</ul>
+	<p>
+		Política de privacidad de Google:
+		<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+	</p>
+
+	<h2>6. Transferencias internacionales</h2>
+	<p>
+		Algunos de los prestadores de servicios mencionados se encuentran en Estados Unidos. Estas transferencias están
+		amparadas por el Marco de Privacidad de Datos UE-EE.UU. (EU-US Data Privacy Framework), decisión de adecuación
+		adoptada por la Comisión Europea en julio de 2023.
+	</p>
+
+	<h2>7. Plazo de conservación</h2>
+	<p>
+		Los datos personales se conservarán mientras se mantenga la relación y no se solicite su supresión, y en cualquier
+		caso durante los plazos legales de prescripción que resulten de aplicación.
+	</p>
+
+	<h2>8. Derechos del usuario</h2>
+	<p>Puede ejercer los siguientes derechos ante el responsable del tratamiento:</p>
+	<ul>
+		<li>Derecho de acceso (art. 15 RGPD)</li>
+		<li>Derecho de rectificación (art. 16 RGPD)</li>
+		<li>Derecho de supresión (art. 17 RGPD)</li>
+		<li>Derecho de limitación del tratamiento (art. 18 RGPD)</li>
+		<li>Derecho de portabilidad (art. 20 RGPD)</li>
+		<li>Derecho de oposición (art. 21 RGPD)</li>
+	</ul>
+	<p>
+		Para ejercer estos derechos, envía un correo a <a href={`mailto:${email}`}>{email}</a> indicando tu solicitud y
+		adjuntando copia de tu documento identificativo.
+	</p>
+	<p>
+		También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a
+			href="https://www.aepd.es"
+			target="_blank"
+			rel="noopener">www.aepd.es</a
+		>) si consideras que el tratamiento no se ajusta a la normativa.
+	</p>
+
+	<h2>9. Modificaciones</h2>
+	<p>
+		{titular} se reserva el derecho a modificar la presente política de privacidad para adaptarla a novedades
+		legislativas o jurisprudenciales. Se recomienda revisar esta página periódicamente. Los cambios entrarán en vigor
+		desde su publicación en el sitio web.
+	</p>
+</Legal>

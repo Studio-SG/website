@@ -1,1 +1,1 @@
-SG Digital landing page
+SG Studio landing page

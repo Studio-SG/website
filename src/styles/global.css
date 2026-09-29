@@ -10,10 +10,19 @@
 	--color-hilo: rgb(26 24 21 / 0.12);
 	--color-verde: #1e6b4e;
 	--color-bosque: #1b4536;
+	/* Solo para avisos de error del formulario. */
+	--color-teja: #a4452c;
 
 	--font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
 	/* Instrument Serif: la tipografía de la que sale el monograma SG. */
 	--font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+}
+
+/* Los enlaces a #contact (cabecera y «Descúbrenos») bajan deslizándose en vez de saltar. */
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
 }
 
 /* Sin barra de scroll visible (la página sigue desplazándose con rueda, teclado y táctil). */
@@ -26,14 +35,16 @@ html::-webkit-scrollbar {
 }
 
 /* Viñeta propia: un guion fino en vez del punto por defecto. */
-.lista > li {
+.lista > li,
+.legal ul > li {
 	position: relative;
 	padding-left: 1.6em;
 	margin-bottom: 0.7em;
 	break-inside: avoid;
 }
 
-.lista > li::before {
+.lista > li::before,
+.legal ul > li::before {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -55,7 +66,7 @@ html::-webkit-scrollbar {
 }
 
 /* En móvil (vertical u horizontal) no hay portada: la página empieza directamente en la barra
-   y SG Digital. Mismo corte que el script de index.astro, que ahí no monta la escena. */
+   y SG Studio. Mismo corte que el script de index.astro, que ahí no monta la escena. */
 @media (max-width: 48rem), (max-height: 30rem) {
 	.pista-portada {
 		display: none;
@@ -119,7 +130,7 @@ html::-webkit-scrollbar {
 	transform-origin: 50.18% 55.5%;
 }
 
-/* Copia decorativa del principio de <main> (barra + SG Digital) que sigue a la pantalla
+/* Copia decorativa del principio de <main> (barra + SG Studio) que sigue a la pantalla
    del portátil: se maqueta al tamaño de la ventana y el script la encoge y la coloca sobre
    la pantalla en cada fotograma. Va fuera del lienzo para que, al terminar el zoom, su transform sea
    exactamente none y se dibuje píxel a píxel igual que el contenido real. */
@@ -171,7 +182,7 @@ html::-webkit-scrollbar {
 	}
 }
 
-/* ——— iPhone de SG Digital: entra solo, desde fuera de la pantalla por la izquierda ———
+/* ——— iPhone de SG Studio: entra solo, desde fuera de la pantalla por la izquierda ———
    Solo con la escena activa (.zoom): espera fuera de la pantalla y el
    script le añade .dentro al llegar a la sección. En la copia del portátil también espera
    fuera, para que el relevo sea idéntico. Sin script, se ve quieto en su sitio. */
@@ -257,4 +268,212 @@ html::-webkit-scrollbar {
 	to {
 		transform: scaleX(1);
 	}
+}
+
+/* ——— Páginas legales ———
+   El texto va sin clases (tal cual se redacta) y toma el estilo de aquí. */
+.legal h1 {
+	font-family: var(--font-serif);
+	font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+	line-height: 1.02;
+	letter-spacing: -0.01em;
+}
+
+.legal h1 + p {
+	margin-top: 1.5rem;
+	color: var(--color-grafito);
+}
+
+.legal h2 {
+	margin-top: 4rem;
+	font-family: var(--font-serif);
+	font-size: clamp(1.875rem, 2.6vw, 2.375rem);
+	line-height: 1.1;
+}
+
+.legal h3 {
+	margin-top: 2.5rem;
+	font-size: 1.1875rem;
+	font-weight: 500;
+}
+
+.legal p,
+.legal li {
+	max-width: 70ch;
+	font-size: 1.1875rem;
+	line-height: 1.6;
+}
+
+.legal p,
+.legal ul {
+	margin-top: 1rem;
+}
+
+.legal a {
+	color: var(--color-verde);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+	overflow-wrap: anywhere;
+}
+
+.legal code {
+	font-size: 0.95em;
+}
+
+/* Tablas de cookies: en móvil se desplazan de lado en vez de desbordar la página. */
+.legal .tabla {
+	margin-top: 1.5rem;
+	overflow-x: auto;
+}
+
+.legal table {
+	min-width: 40rem;
+	border-collapse: collapse;
+	font-size: 1rem;
+}
+
+.legal th,
+.legal td {
+	padding: 0.75rem 1.5rem 0.75rem 0;
+	border-bottom: 1px solid var(--color-hilo);
+	text-align: left;
+	vertical-align: top;
+}
+
+.legal th {
+	font-weight: 500;
+}
+
+/* ——— Formulario de contacto ———
+   Avisos de campo obligatorio: una etiqueta oscura con piquito bajo el campo, en lugar de la
+   burbuja del navegador. Van en el flujo (empujan lo de debajo) para no tapar nunca el
+   campo siguiente, aunque ocupen dos líneas en móvil. */
+.aviso {
+	position: relative;
+	width: fit-content;
+	max-width: 100%;
+	margin-top: 0.75rem;
+	padding: 0.5rem 0.875rem;
+	background: var(--color-tinta);
+	color: var(--color-blanco);
+	font-size: 0.9375rem;
+	line-height: 1.35;
+	animation: aparece-aviso 0.18s ease-out;
+}
+
+.aviso::before {
+	content: "";
+	position: absolute;
+	top: -5px;
+	left: 1rem;
+	width: 10px;
+	height: 10px;
+	background: inherit;
+	rotate: 45deg;
+}
+
+/* Barra lateral de color teja: marca el aviso como error sin romper la paleta. */
+.aviso::after {
+	content: "";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 3px;
+	background: var(--color-teja);
+}
+
+@keyframes aparece-aviso {
+	from {
+		opacity: 0;
+		translate: 0 -4px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.aviso {
+		animation: none;
+	}
+}
+
+/* Botón de enviar: solo borde; al pasar por encima, el verde bosque lo barre en diagonal de
+   izquierda a derecha y el texto pasa a blanco. Color y barrido van juntos aquí, con :hover a
+   secas: con hover: de Tailwind (solo con ratón), en móvil un toque dejaría el botón relleno
+   con el texto del mismo verde. */
+.boton-barrido {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	transition: color 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.boton-barrido:hover,
+.boton-barrido:focus-visible {
+	color: var(--color-blanco);
+}
+
+.boton-barrido::before {
+	content: "";
+	position: absolute;
+	inset: 0 -25%;
+	z-index: -1;
+	background: var(--color-bosque);
+	transform: translateX(-101%) skewX(-24deg);
+	transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.boton-barrido:hover::before,
+.boton-barrido:focus-visible::before {
+	transform: translateX(0) skewX(-24deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.boton-barrido,
+	.boton-barrido::before {
+		transition: none;
+	}
+}
+
+/* Casilla de consentimiento: cuadrada y fina, como el resto de la página. */
+.casilla {
+	appearance: none;
+	display: grid;
+	place-content: center;
+	width: 1.375rem;
+	height: 1.375rem;
+	border: 1px solid rgb(26 24 21 / 0.4);
+	background: var(--color-blanco);
+	cursor: pointer;
+	transition:
+		background-color 0.15s,
+		border-color 0.15s;
+}
+
+.casilla::after {
+	content: "";
+	width: 0.4rem;
+	height: 0.75rem;
+	margin-top: -0.15rem;
+	border: solid var(--color-blanco);
+	border-width: 0 2px 2px 0;
+	rotate: 45deg;
+	scale: 0;
+	transition: scale 0.15s;
+}
+
+.casilla:checked {
+	border-color: var(--color-verde);
+	background: var(--color-verde);
+}
+
+.casilla:checked::after {
+	scale: 1;
+}
+
+.casilla:focus-visible {
+	outline: 1px solid var(--color-verde);
+	outline-offset: 3px;
+}
+
+.casilla[aria-invalid="true"] {
+	border-color: var(--color-teja);
 }
