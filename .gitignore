@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Textos legales guardados para cuando se activen Google Analytics / Ads
+google-analytics-ads.txt
